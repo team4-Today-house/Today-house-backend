@@ -2,6 +2,7 @@ package com.example.todayhousebackend.controller;
 
 
 import com.example.todayhousebackend.dto.SignupRequestDto;
+import com.example.todayhousebackend.exception.ExceptionEnum;
 import com.example.todayhousebackend.exception.RestApiException;
 import com.example.todayhousebackend.exception.RestApiExceptionHandler;
 import com.example.todayhousebackend.jwt.JwtUtil;
@@ -9,6 +10,7 @@ import com.example.todayhousebackend.service.UserService;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.json.HTTP;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,10 +24,10 @@ public class UserController {
   private final UserService userService;
 
   @PostMapping("/api/user/signup")
-  public ResponseEntity<Object> signup(@RequestBody @Valid SignupRequestDto dto){
+  public ResponseEntity<ExceptionEnum> signup(@RequestBody @Valid SignupRequestDto dto){
     userService.signup(dto);
 
-    return new ResponseEntity("회원가입 성공", HttpStatus.OK);
+    return ResponseEntity.ok(ExceptionEnum.INVAILD_TOKEN);
   }
 
   @PostMapping("/api/user/login")
