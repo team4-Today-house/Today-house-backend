@@ -30,10 +30,24 @@ public class User {
   @Column(nullable = false)
   private String email;
 
+  private Long kakaoId;
+
 
   public User(SignupRequestDto dto, String password) {
     this.loginId = dto.getLoginId();
     this.password = password;
     this.email = dto.getEmail();
+  }
+
+  public User(String loginId, Long kakaoId, String password, String email) {
+    this.loginId = loginId;
+    this.kakaoId = kakaoId;
+    this.password = password;
+    this.email = email;
+  }
+
+  public User kakaoIdUpdate(Long kakaoId) {
+    this.kakaoId = kakaoId;
+    return this;
   }
 }
