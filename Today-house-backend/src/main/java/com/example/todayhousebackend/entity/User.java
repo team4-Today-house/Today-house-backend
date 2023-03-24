@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.example.todayhousebackend.dto.SignupRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-@Entity(name = "USERS")
+@Entity(name = "users")
 public class User {
 
   @Id
@@ -27,4 +29,9 @@ public class User {
   private String email;
 
 
+  public User(SignupRequestDto dto, String password) {
+    this.loginId = dto.getLoginId();
+    this.password = password;
+    this.email = dto.getEmail();
+  }
 }
