@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-@Entity(name = "USERS")
+@Entity(name = "users")
 public class User {
 
   @Id
@@ -27,4 +27,9 @@ public class User {
   private String email;
 
 
+  public User(String loginId, String password, String email) {
+    this.loginId = loginId;
+    this.password = password;
+    this.email = email;
+  }
 }

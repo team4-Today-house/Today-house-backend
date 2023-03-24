@@ -1,32 +1,40 @@
 package com.example.todayhousebackend.security;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
+import com.example.todayhousebackend.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 
 public class UserDetailsImpl implements UserDetails {
 
   private final User user;
+  private final String loginId;
 
-  public UserDetailsImpl(User user) {
+  public UserDetailsImpl(User user, String loginId) {
     this.user = user;
+    this.loginId = loginId;
   }
 
   public User getUser() {
     return user;
   }
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return null;
-  }
+//  @Override
+//  public Collection<? extends GrantedAuthority> getAuthorities() {
+//    UserRoleEnum role = user.getRole();
+//    String authority = role.getAuthority();
+//
+//    SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
+//    Collection<GrantedAuthority> authorities = new ArrayList<>();
+//    authorities.add(simpleGrantedAuthority);
+//
+//    return authorities;
+//  }
 
   @Override
   public String getUsername() {
-    return null;
+    return this.loginId;
   }
+
 
   @Override
   public String getPassword() {
@@ -35,21 +43,21 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public boolean isAccountNonExpired() {
-    return true;
+    return false;
   }
 
   @Override
   public boolean isAccountNonLocked() {
-    return true;
+    return false;
   }
 
   @Override
   public boolean isCredentialsNonExpired() {
-    return true;
+    return false;
   }
 
   @Override
   public boolean isEnabled() {
-    return true;
+    return false;
   }
 }
