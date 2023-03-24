@@ -30,7 +30,7 @@ public class UserController {
     return new ResponseEntity("회원가입 성공", HttpStatus.OK);
   }
 
-  @PostMapping("/login")
+  @PostMapping("/api/user/login")
   public ResponseEntity<Object> login(@RequestBody SignupRequestDto dto, HttpServletResponse response){
     String token = userService.login(dto);
 
