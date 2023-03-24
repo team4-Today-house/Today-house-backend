@@ -14,11 +14,10 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
 public class CommentController {
     private final CommentService commentService;
 
-    @PostMapping("/api/comment")
+    @PostMapping("/comment")
     public CommentResponseDto createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return  commentService.createComment(commentRequestDto, userDetails.getUser());
     }
