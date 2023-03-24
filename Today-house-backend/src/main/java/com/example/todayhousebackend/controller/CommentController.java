@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/")
 public class CommentController {
     private final CommentService commentService;
 
@@ -22,8 +23,19 @@ public class CommentController {
         return  commentService.createComment(commentRequestDto, userDetails.getUser());
     }
 
-    @GetMapping("/api/comment/{commentId}")
-    public List<CommentResponseDto> getComments(@PathVariable Long commentId){
-        return commentService.getComments(commentId);
+    @GetMapping("/comment")
+    public List<CommentResponseDto> getComments(){
+        return commentService.getComments();
     }
+
+    @PatchMapping("/{commentId}")
+    public CommentResponseDto updateComment(@PathVariable Long commentId, @RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return commentService.updateComment(commentId, commentRequestDto, userDetails.getUser());
+    }
+
+    @DeleteMapping("/{commentId}")
+    public void deleteComment(@PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        commentService.deleteComment(commentId, userDetails.getUser());
+    }
+
 }

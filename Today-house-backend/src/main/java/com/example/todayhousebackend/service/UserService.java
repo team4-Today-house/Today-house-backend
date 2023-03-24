@@ -2,10 +2,12 @@ package com.example.todayhousebackend.service;
 
 import com.example.todayhousebackend.dto.SignupRequestDto;
 import com.example.todayhousebackend.entity.User;
+import com.example.todayhousebackend.exception.ApiException;
 import com.example.todayhousebackend.jwt.JwtUtil;
 import com.example.todayhousebackend.repository.UserRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,9 +21,9 @@ public class UserService {
   private final PasswordEncoder passwordEncoder;
   private final JwtUtil jwtUtil;
 
+
   @Transactional
   public void signup(SignupRequestDto dto){
-//    String password = encoder.encode(dto.getPassword());
 
     Optional<User> found = userRepository.findByLoginId(dto.getLoginId());
     if(found.isPresent()) {
@@ -29,7 +31,6 @@ public class UserService {
     }
 
     String password = passwordEncoder.encode(dto.getPassword());
-
 
     User user = new User(dto ,password);
     userRepository.save(user);
