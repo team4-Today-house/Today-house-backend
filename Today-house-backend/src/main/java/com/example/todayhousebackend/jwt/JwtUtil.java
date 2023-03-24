@@ -1,6 +1,6 @@
 package com.example.todayhousebackend.jwt;
 
-import com.example.todayhousebackend.security.UserDetailsServiceImpl;
+import com.example.todayhousebackend.entity.UserRoleEnum;
 import com.example.todayhousebackend.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -51,13 +51,13 @@ public class JwtUtil {
     return null;
   }
 
-  public String createToken(String loginId) {
+  public String createToken(String loginId, UserRoleEnum role) {
     Date date = new Date();
 
     return BEARER_PREFIX +
         Jwts.builder()
             .setSubject(loginId)
-            .claim(AUTHORIZATION_KEY, loginId)
+            .claim(AUTHORIZATION_KEY, role)
             .setExpiration(new Date(date.getTime() + TOKEN_TIME))
             .setIssuedAt(date)
             .signWith(key, signatureAlgorithm)

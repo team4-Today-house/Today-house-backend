@@ -2,6 +2,7 @@ package com.example.todayhousebackend.service;
 
 import com.example.todayhousebackend.dto.SignupRequestDto;
 import com.example.todayhousebackend.entity.User;
+import com.example.todayhousebackend.entity.UserRoleEnum;
 import com.example.todayhousebackend.jwt.JwtUtil;
 import com.example.todayhousebackend.repository.UserRepository;
 import java.util.Optional;
@@ -21,6 +22,7 @@ public class UserService {
   private final UserRepository userRepository;
   private final PasswordEncoder encoder;
   private final JwtUtil jwtUtil;
+  private static final String ADMIN_TOKEN = "admin";
 
   @Transactional
   public void signup(SignupRequestDto dto){
@@ -33,9 +35,10 @@ public class UserService {
     if(found.isPresent()) {
       throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
     }
+    UserRoleEnum role = UserRoleEnum.USER;
 
-    User user = new User(loginId, password, email);
-    userRepository.save(user);
+    User user = new User(loginId, password, email, role);
+    userRepository.saveAndFlush(user);
   }
 
   @Transactional
@@ -51,7 +54,7 @@ public class UserService {
     if(!encoder.matches(dto.getPassword(), encodePassword)){
       throw new IllegalArgumentException("인증 정보가 맞지 않습니다.");
     }
-    return jwtUtil.createToken(user.getLoginId());
+    return jwtUtil.createToken(user.getLoginId(), user.getRole());
   }
 
 }

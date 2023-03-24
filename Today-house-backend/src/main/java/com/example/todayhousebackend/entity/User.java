@@ -2,6 +2,8 @@ package com.example.todayhousebackend.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,10 +28,15 @@ public class User {
   @Column(nullable = false)
   private String email;
 
+  @Column(nullable = false)
+  @Enumerated(value = EnumType.STRING)
+  private UserRoleEnum role;
 
-  public User(String loginId, String password, String email) {
+
+  public User(String loginId, String password, String email, UserRoleEnum role) {
     this.loginId = loginId;
     this.password = password;
     this.email = email;
+    this.role = role;
   }
 }

@@ -4,6 +4,7 @@ package com.example.todayhousebackend.controller;
 import com.example.todayhousebackend.dto.SignupRequestDto;
 import com.example.todayhousebackend.exception.RestApiException;
 import com.example.todayhousebackend.exception.RestApiExceptionHandler;
+import com.example.todayhousebackend.jwt.JwtUtil;
 import com.example.todayhousebackend.service.UserService;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -20,7 +21,7 @@ public class UserController {
 
   private final UserService userService;
 
-  @PostMapping("/api/user/login")
+  @PostMapping("/api/user/signup")
   public ResponseEntity<Object> signup(@RequestBody @Valid SignupRequestDto dto){
     userService.signup(dto);
 
@@ -30,6 +31,7 @@ public class UserController {
   @PostMapping("/api/user/login")
   public ResponseEntity<Object> login(@RequestBody SignupRequestDto dto, HttpServletResponse resp){
     String token = userService.login(dto);
+    resp.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
     return new ResponseEntity("로그인 성공", HttpStatus.OK);
   }
 

@@ -19,7 +19,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     User user = userRepository.findByLoginId(loginId)
         .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
 
-    return new com.example.todayhousebackend.security.UserDetailsImpl(user, user.getLoginId());
+    return new UserDetailsImpl(user, user.getLoginId());
   }
 
 }
