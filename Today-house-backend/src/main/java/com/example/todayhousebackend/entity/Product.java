@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Getter
@@ -35,5 +36,8 @@ public class Product {
 
     @Column
     private String imgsrc;
+
+    @OneToMany(mappedBy = "product")
+    private List<Comment> comments;   // product 안에서 댓글이 여러개니까 코멘트들을 리스트 형식으로 감싸서 보내준다.
 
 }

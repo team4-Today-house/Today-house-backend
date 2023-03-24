@@ -1,34 +1,38 @@
 package com.example.todayhousebackend.entity;
 
-import javax.persistence.*;
-
-import lombok.AllArgsConstructor;
+import com.example.todayhousebackend.dto.CommentRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Comment extends Timestamped{
+@NoArgsConstructor
+public class Comment extends Timestamped {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue (strategy = GenerationType.IDENTITY)
   private Long commentId;
 
-  @Column(updatable = false)
-  private String contents;
+  @Column(nullable = false)
+  private String comment;
 
-  @Column(updatable = false)
+  @Column(nullable = false)
   private int star;
 
-  @Column
-  private int commentimg;
+  @ManyToOne
+  @JoinColumn(name = "USER_ID", nullable = false)
+  private User user;
 
-  @Column(updatable = false)
-  private int commentcount;
+  @ManyToOne
+  @JoinColumn(name = "PRODUCT_ID", nullable = false)
+  private Product product;
 
-  @Column
-  private String imgsrc;
-
+  public Comment(CommentRequestDto commentRequestDto, User user, Product product) {
+    this.comment = commentRequestDto.getContents();
+    this.star = commentRequestDto.getStar();
+    this.user = user;
+    this.product = product;
+  }
 }
