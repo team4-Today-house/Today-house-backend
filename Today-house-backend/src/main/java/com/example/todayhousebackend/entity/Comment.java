@@ -3,6 +3,7 @@ package com.example.todayhousebackend.entity;
 import com.example.todayhousebackend.dto.CommentRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
@@ -34,5 +35,10 @@ public class Comment extends Timestamped {
     this.star = commentRequestDto.getStar();
     this.user = user;
     this.product = product;
+  }
+
+  @Transactional
+  public void update(CommentRequestDto commentRequestDto) {
+    this.comment = commentRequestDto.getContents();
   }
 }
