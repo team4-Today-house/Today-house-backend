@@ -30,22 +30,10 @@ public class User {
   @Column(nullable = false)
   private String email;
 
-  @Column(nullable = false)
-  @Enumerated(value = EnumType.STRING)
-  private UserRoleEnum role;
 
-
-<<<<<<< HEAD
-  public User(String loginId, String password, String email, UserRoleEnum role) {
-    this.loginId = loginId;
-    this.password = password;
-    this.email = email;
-    this.role = role;
-=======
   public User(SignupRequestDto dto, String password) {
     this.loginId = dto.getLoginId();
     this.password = password;
     this.email = dto.getEmail();
->>>>>>> 4555c85a7da712cfaa238f9e7d59bf84b1421ed4
   }
 }
