@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.example.todayhousebackend.dto.SignupRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,9 +29,9 @@ public class User {
   private String email;
 
 
-  public User(String loginId, String password, String email) {
-    this.loginId = loginId;
+  public User(SignupRequestDto dto, String password) {
+    this.loginId = dto.getLoginId();
     this.password = password;
-    this.email = email;
+    this.email = dto.getEmail();
   }
 }
