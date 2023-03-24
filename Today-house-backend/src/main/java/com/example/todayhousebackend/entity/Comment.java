@@ -1,9 +1,7 @@
 package com.example.todayhousebackend.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +16,19 @@ public class Comment extends Timestamped{
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long commentId;
 
+  @Column(updatable = false)
+  private String contents;
 
+  @Column(updatable = false)
+  private int star;
+
+  @Column
+  private int commentimg;
+
+  @Column(updatable = false)
+  private int commentcount;
+
+  @Column
+  private String imgsrc;
 
 }
