@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '2.7.9'
+	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
@@ -26,14 +26,20 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+<<<<<<< HEAD
     runtimeOnly 'com.h2database:h2'
 //	runtimeOnly 'com.mysql:mysql-connector-j'
+=======
+
+	runtimeOnly 'com.mysql:mysql-connector-j'
+>>>>>>> 4555c85a7da712cfaa238f9e7d59bf84b1421ed4
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+	runtimeOnly 'com.h2database:h2'
 
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation group: 'org.json', name: 'json', version: '20220924'
 
 	compileOnly group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
@@ -45,6 +51,9 @@ dependencies {
 
 	testImplementation 'org.mockito:mockito-core:4.8.0'
 	testImplementation 'org.mockito:mockito-junit-jupiter:4.8.0'
+
+	runtimeOnly 'com.mysql:mysql-connector-j'
+
 }
 
 jar {

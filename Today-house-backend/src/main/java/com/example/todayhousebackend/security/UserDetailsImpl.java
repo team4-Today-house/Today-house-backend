@@ -2,22 +2,26 @@ package com.example.todayhousebackend.security;
 
 
 import com.example.todayhousebackend.entity.User;
+<<<<<<< HEAD
 import com.example.todayhousebackend.entity.UserRoleEnum;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+=======
+import org.springframework.security.core.GrantedAuthority;
+>>>>>>> 4555c85a7da712cfaa238f9e7d59bf84b1421ed4
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 
 public class UserDetailsImpl implements UserDetails {
 
   private final User user;
-  private final String loginId;
 
-  public UserDetailsImpl(User user, String loginId) {
+  public UserDetailsImpl(User user) {
     this.user = user;
-    this.loginId = loginId;
   }
 
   public User getUser() {
@@ -26,6 +30,7 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
+<<<<<<< HEAD
     UserRoleEnum role = user.getRole();
     String authority = role.getAuthority();
 
@@ -34,13 +39,15 @@ public class UserDetailsImpl implements UserDetails {
     authorities.add(simpleGrantedAuthority);
 
     return authorities;
+=======
+    return null;
+>>>>>>> 4555c85a7da712cfaa238f9e7d59bf84b1421ed4
   }
 
   @Override
   public String getUsername() {
-    return this.loginId;
+    return null;
   }
-
 
   @Override
   public String getPassword() {
@@ -49,21 +56,21 @@ public class UserDetailsImpl implements UserDetails {
 
   @Override
   public boolean isAccountNonExpired() {
-    return false;
+    return true;
   }
 
   @Override
   public boolean isAccountNonLocked() {
-    return false;
+    return true;
   }
 
   @Override
   public boolean isCredentialsNonExpired() {
-    return false;
+    return true;
   }
 
   @Override
   public boolean isEnabled() {
-    return false;
+    return true;
   }
 }
