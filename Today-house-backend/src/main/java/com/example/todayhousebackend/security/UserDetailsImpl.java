@@ -1,10 +1,11 @@
 package com.example.todayhousebackend.security;
 
+import com.example.todayhousebackend.entity.User;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+
 
 public class UserDetailsImpl implements UserDetails {
 

@@ -1,13 +1,10 @@
 package com.example.todayhousebackend.jwt;
 
 import com.example.todayhousebackend.security.UserDetailsServiceImpl;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.UnsupportedJwtException;
+import com.example.todayhousebackend.security.UserDetailsServiceImpl;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SecurityException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,11 +24,13 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 public class JwtUtil {
-  private final UserDetailsServiceImpl userDetailsService;
 
   public static final String AUTHORIZATION_HEADER = "Authorization";
+  public static final String AUTHORIZATION_KEY = "auth";
   private static final String BEARER_PREFIX = "Bearer ";
   private static final long TOKEN_TIME = 60 * 60 * 1000L;
+
+  private final UserDetailsServiceImpl userDetailsService;
 
   @Value("${jwt.secret.key}")
   private String secretKey;
@@ -44,7 +43,6 @@ public class JwtUtil {
     key = Keys.hmacShaKeyFor(bytes);
   }
 
-  // header 토큰을 가져오기
   public String resolveToken(HttpServletRequest request) {
     String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
     if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
@@ -53,20 +51,19 @@ public class JwtUtil {
     return null;
   }
 
-  // 토큰 생성
-  public String createToken(String loginid) {
+  public String createToken(String loginId) {
     Date date = new Date();
 
     return BEARER_PREFIX +
         Jwts.builder()
-            .setSubject(loginid)
+            .setSubject(loginId)
+            .claim(AUTHORIZATION_KEY, loginId)
             .setExpiration(new Date(date.getTime() + TOKEN_TIME))
             .setIssuedAt(date)
             .signWith(key, signatureAlgorithm)
             .compact();
   }
 
-  // 토큰 검증
   public boolean validateToken(String token) {
     try {
       Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
@@ -80,17 +77,15 @@ public class JwtUtil {
     } catch (IllegalArgumentException e) {
       log.info("JWT claims is empty, 잘못된 JWT 토큰 입니다.");
     }
-    throw new IllegalArgumentException("토큰이 유효하지 않습니다.");
+    return false;
   }
 
-  // 토큰에서 사용자 정보 가져오기
   public Claims getUserInfoFromToken(String token) {
     return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
   }
 
-  // 인증 객체 생성
-  public Authentication createAuthentication(String loginid) {
-    UserDetails userDetails = userDetailsService.loadUserByUsername(loginid);
+  public Authentication createAuthentication(String loginId) {
+    UserDetails userDetails = userDetailsService.loadUserByUsername(loginId);
     return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
   }
 
