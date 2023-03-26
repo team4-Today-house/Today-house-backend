@@ -25,12 +25,13 @@ public class seleniumCrawling {
     // 경로
     final String WEB_DRIVER_PATH = "C:/Users/유진/Desktop/chromedriver_win32/chromedriver.exe";
 
+
     // 드라이버 실행 가능 환경설정
     System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 
     // 크롬 옵션 설정
     ChromeOptions options = new ChromeOptions();
-
+    options.addArguments("--remote-allow-origins=*");
     // URL 설정
     String url = "https://ohou.se/store?affect_type=Home&affect_id=0";
 
