@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -31,6 +32,7 @@ public class seleniumCrawling {
 
     // 크롬 옵션 설정
     ChromeOptions options = new ChromeOptions();
+    options.setPageLoadStrategy(PageLoadStrategy.NONE);
     options.addArguments("--remote-allow-origins=*");
     // URL 설정
     String url = "https://ohou.se/store?affect_type=Home&affect_id=0";
@@ -45,6 +47,8 @@ public class seleniumCrawling {
     JavascriptExecutor jse = (JavascriptExecutor) driver;
     jse.executeScript("window.scrollBy(0,14000)");
     Thread.sleep(2000);;
+    jse.executeScript("window.scrollBy(0,14000)");
+    Thread.sleep(2000);;
 
     List<WebElement> productList = driver.findElements(By.xpath("//div[@class='production-item__overlay']"));
     for (WebElement product : productList) {
@@ -53,6 +57,6 @@ public class seleniumCrawling {
       String discountrate = product.findElement(By.className("production-item-price__rate")).getText();
       String price = product.findElement(By.className("production-item-price__price")).getText();
     }
-    driver.quit();
+    driver.close();
   }
 }
