@@ -1,5 +1,7 @@
 package com.example.todayhousebackend.crawling;
 
+import com.example.todayhousebackend.entity.Product;
+import com.example.todayhousebackend.repository.ProductRepository;
 import java.awt.AWTException;
 import java.io.IOException;
 import java.util.List;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class seleniumCrawling {
+
 
   public static void main(String[] args) throws InterruptedException, AWTException, IOException {
 
@@ -50,13 +53,24 @@ public class seleniumCrawling {
     jse.executeScript("window.scrollBy(0,14000)");
     Thread.sleep(2000);;
 
-    List<WebElement> productList = driver.findElements(By.xpath("//div[@class='production-item__overlay']"));
+
+    List<WebElement> productList = driver.findElements(By.xpath("//div[@class='production-item__content']"));
     for (WebElement product : productList) {
       String brandname = product.findElement(By.className("production-item__header__brand")).getText();
       String title = product.findElement(By.className("production-item__header__name")).getText();
       String discountrate = product.findElement(By.className("production-item-price__rate")).getText();
       String price = product.findElement(By.className("production-item-price__price")).getText();
+
+      Product product1 = new Product();
+      product1.setBrandname(brandname);
+      product1.setTitle(title);
+      product1.setDiscountrate(discountrate);
+      product1.setPrice(price);
+
+      product.add(product1);
+
     }
-    driver.close();
+    productRepository.save(product);
+    //driver.close();
   }
 }
