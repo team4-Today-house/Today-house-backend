@@ -4,6 +4,7 @@ import com.example.todayhousebackend.entity.Product;
 import com.example.todayhousebackend.repository.ProductRepository;
 import java.awt.AWTException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
@@ -13,22 +14,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class seleniumCrawling {
+public class SeleniumCrawling {
+  private final ProductRepository productRepository;
 
-
-  public static void main(String[] args) throws InterruptedException, AWTException, IOException {
-
+  @Scheduled(cron = "0 0 0 * * ?")// 매일 0시에 실행
+  public void crawl() throws InterruptedException, AWTException, IOException {
     WebElement element;
 
     // 크롬 드라이버 사용
     final String WEB_DRIVER_ID = "webdriver.chrome.driver";
     // 경로
     final String WEB_DRIVER_PATH = "C:/Users/유진/Desktop/chromedriver_win32/chromedriver.exe";
-
 
     // 드라이버 실행 가능 환경설정
     System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
@@ -53,24 +54,22 @@ public class seleniumCrawling {
     jse.executeScript("window.scrollBy(0,14000)");
     Thread.sleep(2000);;
 
-
     List<WebElement> productList = driver.findElements(By.xpath("//div[@class='production-item__content']"));
+    List<Product> products = new ArrayList<>();
     for (WebElement product : productList) {
       String brandname = product.findElement(By.className("production-item__header__brand")).getText();
       String title = product.findElement(By.className("production-item__header__name")).getText();
       String discountrate = product.findElement(By.className("production-item-price__rate")).getText();
       String price = product.findElement(By.className("production-item-price__price")).getText();
 
-      Product product1 = new Product();
-      product1.setBrandname(brandname);
-      product1.setTitle(title);
-      product1.setDiscountrate(discountrate);
-      product1.setPrice(price);
-
-      product.add(product1);
+      System.out.println("Brand Name: " + brandname);
+      System.out.println("Title: " + title);
+      System.out.println("Discount Rate: " + discountrate);
+      System.out.println("Price: " + price);
 
     }
-    productRepository.save(product);
-    //driver.close();
+
+    productRepository.saveAll(products);
+    driver.quit();
   }
 }
