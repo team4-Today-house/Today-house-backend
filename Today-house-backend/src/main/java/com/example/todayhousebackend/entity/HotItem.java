@@ -16,8 +16,8 @@ public class HotItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long hotitemId;
 
-    @Column(updatable = false)
-    private String categoryname;
+//    @Column(updatable = false)
+//    private String categoryname;
 
     @Column(updatable = false)
     private String brandname;

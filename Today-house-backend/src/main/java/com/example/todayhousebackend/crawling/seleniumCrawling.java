@@ -44,12 +44,12 @@ public class seleniumCrawling {
     WebDriver driver = new ChromeDriver(options);
     driver.get(url);
     // 브라우저가 완전히 로딩될 때 까지 시간 기다림
-    Thread.sleep(5000);
+    Thread.sleep(10000);
 
     // 웹 페이지 스크롤
     JavascriptExecutor jse = (JavascriptExecutor) driver;
     jse.executeScript("window.scrollBy(0,4000)");
-    Thread.sleep(1000);
+    Thread.sleep(10000);
 
 
     // List<WebElement> productImages = driver.findElements(By.xpath("//*[@id=\"store-index\"]/section[1]/div/div[1]/div/article/div[1]/div/div/img"));
@@ -70,8 +70,9 @@ public class seleniumCrawling {
       System.out.println("Title: " + title);
       System.out.println("Discount Rate: " + discountrate);
       System.out.println("Price: " + price);
-
     }
+
+
     //driver.close();
   }
 }
