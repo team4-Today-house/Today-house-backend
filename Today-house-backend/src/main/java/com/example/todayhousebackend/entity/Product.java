@@ -19,7 +19,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Builder
-@Setter
 public class Product {
 
     @Id
@@ -32,7 +31,7 @@ public class Product {
     @Column(updatable = false)
     private String title;
 
-    @Column
+    @Column(updatable = false)
     private String discountrate;
 
     @Column(updatable = false)

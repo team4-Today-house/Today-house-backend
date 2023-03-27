@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
@@ -30,8 +31,8 @@ public class HotItem {
     @Column(updatable = false)
     private String price;
 
-    @Column
-    private String imgsrc;
+    @Column(updatable = false)
+    private String img;
 
 
 
