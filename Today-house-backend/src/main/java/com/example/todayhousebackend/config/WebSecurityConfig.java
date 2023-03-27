@@ -48,10 +48,7 @@ public class WebSecurityConfig {
   public WebSecurityCustomizer devWebSecurityCustomizer() {
 
     return (web) -> web.ignoring()
-<<<<<<< HEAD
-=======
 //                .requestMatchers(PathRequest.toH2Console())
->>>>>>> 5f53f2dc021185d6a3fa44f764b7fd79f4a07924
         .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
   }
 
@@ -66,10 +63,7 @@ public class WebSecurityConfig {
         .antMatchers(HttpMethod.GET,"/chitchat/**").permitAll()
         .anyRequest().authenticated()
         .and().cors()
-<<<<<<< HEAD
-=======
         // JWT 인증/인가를 사용하기 위한 설정
->>>>>>> 5f53f2dc021185d6a3fa44f764b7fd79f4a07924
         .and().addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
     http.exceptionHandling().accessDeniedPage("/api/user/forbidden");
@@ -82,14 +76,11 @@ public class WebSecurityConfig {
 
     CorsConfiguration config = new CorsConfiguration();
 
-<<<<<<< HEAD
-=======
     // 사전에 약속된 출처를 명시
     config.addAllowedOrigin("http://localhost:3001");
     config.addAllowedOrigin("http://localhost:3000");
 //    config.addAllowedOrigin("http://mini-prject-team3.s3-website.ap-northeast-2.amazonaws.com");
 //    config.addAllowedOrigin("http://charleybucket.s3-website.ap-northeast-2.amazonaws.com");
->>>>>>> 5f53f2dc021185d6a3fa44f764b7fd79f4a07924
 
     config.setAllowedOriginPatterns(Arrays.asList("*"));
 

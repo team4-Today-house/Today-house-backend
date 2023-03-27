@@ -25,9 +25,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
 
-//    @Column(updatable = false)
-//    private String categoryname;
-
     @Column(updatable = false)
     private String brandname;
 

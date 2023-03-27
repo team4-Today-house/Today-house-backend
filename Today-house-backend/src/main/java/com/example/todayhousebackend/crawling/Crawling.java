@@ -35,14 +35,14 @@ public class Crawling {
       Element titles = title.get(i);
       Element discountrates = discountrate.get(i);
       Element prices = contentsPrice.get(i);
-      String imgUrl = img.get(i).select("img").attr("src");
+      //String imgUrl = img.get(i).select("img").attr("src");
 
       String brandnames1 = brandnames.text();
       String title1 = titles.text();
       String discountrates1 = discountrates.text();
       String price = prices.text();
 
-      System.out.println( "\n브랜드이름: " + brandnames1  + "\n상품명: "+ title1 + "\n할인율: " + discountrates1 + "\n가격: " + price + "\n이미지: " + imgUrl);
+      System.out.println( "\n브랜드이름: " + brandnames1  + "\n상품명: "+ title1 + "\n할인율: " + discountrates1 + "\n가격: " + price + "\n이미지: " );
 
       System.out.println("");
 
@@ -51,7 +51,7 @@ public class Crawling {
       item.put("상품명", title1);
       item.put("할인율", discountrates1);
       item.put("가격", price);
-      item.put("이미지", imgUrl);
+      //item.put("이미지", imgUrl);
 
       result.add(item);
     }
@@ -72,7 +72,7 @@ public class Crawling {
         preparedStatement.setString(2, item.get("상품명"));
         preparedStatement.setString(3, item.get("할인율"));
         preparedStatement.setString(4, item.get("가격"));
-        preparedStatement.setString(5, item.get("이미지"));
+        //preparedStatement.setString(5, item.get("이미지"));
         preparedStatement.executeUpdate();
       }
     } catch (SQLException e){

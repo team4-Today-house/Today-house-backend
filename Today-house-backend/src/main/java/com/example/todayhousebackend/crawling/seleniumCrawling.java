@@ -48,7 +48,7 @@ public class seleniumCrawling {
 
     // 웹 페이지 스크롤
     JavascriptExecutor jse = (JavascriptExecutor) driver;
-    jse.executeScript("window.scrollBy(0,4000)");
+    jse.executeScript("window.scrollBy(0,1000)");
     Thread.sleep(10000);
 
 
