@@ -1,6 +1,7 @@
 package com.example.todayhousebackend.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,14 +11,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 public class HotItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long hotitemId;
-
-    @Column(updatable = false)
-    private String categoryname;
 
     @Column(updatable = false)
     private String brandname;
@@ -26,12 +25,14 @@ public class HotItem {
     private String title;
 
     @Column(updatable = false)
-    private int discountrate;
+    private String discountrate;
 
     @Column(updatable = false)
-    private int price;
+    private String price;
 
     @Column
     private String imgsrc;
+
+
 
 }

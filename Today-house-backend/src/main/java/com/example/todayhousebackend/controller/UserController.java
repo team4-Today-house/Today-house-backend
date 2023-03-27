@@ -45,11 +45,12 @@ public class UserController {
     String token = userService.login(dto);
     response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);
     Map<String, String> res = new HashMap<>();
-    res.put("회원가입 성공", String.valueOf(HttpStatus.OK));
+    res.put("로그인 성공", String.valueOf(HttpStatus.OK));
     return ResponseEntity.ok(res);
   }
+
   @GetMapping("/kakao/callback")
-  public String kakaoLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
+  public ResponseEntity kakaoLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
     // code: 카카오 서버로부터 받은 인가 코드
     String createToken = kakaoService.kakaoLogin(code, response);
 
@@ -59,7 +60,7 @@ public class UserController {
     response.addCookie(cookie); // addCookie 를 사용해 이 안에 cookie를 서버에서 넣어줄 수 있다.
     // 클라이언트에서 직접 쿠키를 받아서 쿠키 저장소에 저장하지 않아도 자동으로 쿠키 저장소에 저장.
 
-    return "redirect:/api/shop";
+    return ResponseEntity.ok().body("카카오로그인");
   }
 
 }

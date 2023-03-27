@@ -1,18 +1,18 @@
-package com.example.todayhousebackend;
+package com.example.selenium;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+
 @EnableJpaAuditing
 @EnableScheduling
 @SpringBootApplication
-public class TodayHouseBackendApplication {
+public class SeleniumApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TodayHouseBackendApplication.class, args);
-
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SeleniumApplication.class, args);
+    }
 
 }
