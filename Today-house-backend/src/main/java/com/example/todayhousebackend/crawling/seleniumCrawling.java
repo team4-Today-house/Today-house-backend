@@ -85,27 +85,27 @@ public class seleniumCrawling {
       // FIXME : 3
       // dtoList.add(dto)
 
-      String url1 = "jdbc:mysql://springboot-database.cwonrvmarhpy.ap-northeast-2.rds.amazonaws.com:3306/todayhouse";
-      String user = "admin";
-      String password = "tjdgur123";
-
-      try(Connection connection = DriverManager.getConnection(url1, user, password)){
-        // INSERT 쿼리
-        String query = "INSERT INTO product(brandname, title, discountrate, price, img) VALUES(?, ?, ?, ?, ?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-
-        // 데이터 삽입
-        for(Map<String, String> item : result){
-          preparedStatement.setString(1, item.get("브랜드 이름"));
-          preparedStatement.setString(2, item.get("상품명"));
-          preparedStatement.setString(3, item.get("할인율"));
-          preparedStatement.setString(4, item.get("가격"));
-          preparedStatement.setString(5, item.get("이미지"));
-          preparedStatement.executeUpdate();
-        }
-      } catch (SQLException e){
-        e.printStackTrace();
-      }
+//      String url1 = "jdbc:mysql://springboot-database.cwonrvmarhpy.ap-northeast-2.rds.amazonaws.com:3306/todayhouse";
+//      String user = "admin";
+//      String password = "tjdgur123";
+//
+//      try(Connection connection = DriverManager.getConnection(url1, user, password)){
+//        // INSERT 쿼리
+//        String query = "INSERT INTO product(brandname, title, discountrate, price, img) VALUES(?, ?, ?, ?, ?)";
+//        PreparedStatement preparedStatement = connection.prepareStatement(query);
+//
+//        // 데이터 삽입
+//        for(Map<String, String> item : result){
+//          preparedStatement.setString(1, item.get("브랜드 이름"));
+//          preparedStatement.setString(2, item.get("상품명"));
+//          preparedStatement.setString(3, item.get("할인율"));
+//          preparedStatement.setString(4, item.get("가격"));
+//          preparedStatement.setString(5, item.get("이미지"));
+//          preparedStatement.executeUpdate();
+//        }
+//      } catch (SQLException e){
+//        e.printStackTrace();
+//      }
 
     }
     driver.close();
