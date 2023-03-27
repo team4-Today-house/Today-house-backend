@@ -47,12 +47,17 @@ public class seleniumCrawling {
     WebDriver driver = new ChromeDriver(options);
     driver.get(url);
     // 브라우저가 완전히 로딩될 때 까지 시간 기다림
-    Thread.sleep(10000);
+    Thread.sleep(4000);
 
     // 웹 페이지 스크롤
     JavascriptExecutor jse = (JavascriptExecutor) driver;
-    jse.executeScript("window.scrollBy(0,1000)");
-    Thread.sleep(10000);
+    jse.executeScript("window.scrollBy(0,40000)");
+    Thread.sleep(2000);
+    jse.executeScript("window.scrollBy(0,40000)");
+    Thread.sleep(2000);
+    jse.executeScript("window.scrollBy(0,40000)");
+    Thread.sleep(2000);
+
 
     List<Map<String, String>> result = new ArrayList<>();
     List<WebElement> productList = driver.findElements(By.xpath("//article[@class='production-item']"));

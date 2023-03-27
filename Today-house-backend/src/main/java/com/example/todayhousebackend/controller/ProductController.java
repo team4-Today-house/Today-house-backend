@@ -1,7 +1,6 @@
 package com.example.todayhousebackend.controller;
 
 import com.example.todayhousebackend.dto.ProductResponseDto;
-import com.example.todayhousebackend.dto.TodayDealResponseDto;
 import com.example.todayhousebackend.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

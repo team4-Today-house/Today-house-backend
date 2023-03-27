@@ -64,7 +64,7 @@ public class Crawling {
 
     try(Connection connection = DriverManager.getConnection(url, user, password)){
       // INSERT 쿼리
-      String query = "INSERT INTO product(brandname, title, discountrate, price, img) VALUES(?, ?, ?, ?, ?)";
+      String query = "INSERT INTO hot_item(brandname, title, discountrate, price, img) VALUES(?, ?, ?, ?, ?)";
       PreparedStatement preparedStatement = connection.prepareStatement(query);
 
       // 데이터 삽입
