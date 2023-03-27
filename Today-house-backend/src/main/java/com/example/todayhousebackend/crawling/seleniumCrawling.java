@@ -1,5 +1,6 @@
 package com.example.todayhousebackend.crawling;
 
+import com.example.todayhousebackend.dto.CrawlingDto;
 import com.example.todayhousebackend.entity.Product;
 import com.example.todayhousebackend.repository.ProductRepository;
 import java.awt.AWTException;
@@ -21,6 +22,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @RequiredArgsConstructor
 public class seleniumCrawling {
@@ -32,7 +34,7 @@ public class seleniumCrawling {
     // 크롬 드라이버 사용
     final String WEB_DRIVER_ID = "webdriver.chrome.driver";
     // 경로
-    final String WEB_DRIVER_PATH = "C:/Users/유진/Desktop/chromedriver_win32/chromedriver.exe";
+    final String WEB_DRIVER_PATH = "D:/사용자 폴더/Administrator/Downloads/chromedriver_win32/chromedriver.exe";
 
     System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 
@@ -77,6 +79,25 @@ public class seleniumCrawling {
       String price = product.findElement(By.className("production-item-price__price")).getText();
       String img = product.findElement(By.xpath("//img[@class='image']")).getAttribute("src");
 
+      Product product1 = new Product();
+      product1.setBrandname(brandname);
+      product1.setTitle(title);
+      product1.setDiscountrate(discountrate);
+      product1.setPrice(price);
+      product1.setImg(img);
+      entityManager.persist(product1);
+
+      List<CrawlingDto> crawlingDtos = new ArrayList<>();
+      CrawlingDto dto = new CrawlingDto();
+      dto.setBrandname(brandname);
+      dto.setTitle(title);
+      dto.setDiscountrate(discountrate);
+      dto.setPrice(price);
+      dto.setImg(img);
+      crawlingDtos.add(dto);
+      count++;
+
+
       System.out.println("Brand Name: " + brandname);
       System.out.println("Title: " + title);
       System.out.println("Discount Rate: " + discountrate);
@@ -85,27 +106,27 @@ public class seleniumCrawling {
       // FIXME : 3
       // dtoList.add(dto)
 
-      String url1 = "jdbc:mysql://springboot-database.cwonrvmarhpy.ap-northeast-2.rds.amazonaws.com:3306/todayhouse";
-      String user = "admin";
-      String password = "tjdgur123";
-
-      try(Connection connection = DriverManager.getConnection(url1, user, password)){
-        // INSERT 쿼리
-        String query = "INSERT INTO product(brandname, title, discountrate, price, img) VALUES(?, ?, ?, ?, ?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-
-        // 데이터 삽입
-        for(Map<String, String> item : result){
-          preparedStatement.setString(1, item.get("브랜드 이름"));
-          preparedStatement.setString(2, item.get("상품명"));
-          preparedStatement.setString(3, item.get("할인율"));
-          preparedStatement.setString(4, item.get("가격"));
-          preparedStatement.setString(5, item.get("이미지"));
-          preparedStatement.executeUpdate();
-        }
-      } catch (SQLException e){
-        e.printStackTrace();
-      }
+//      String url1 = "jdbc:mysql://springboot-database.cwonrvmarhpy.ap-northeast-2.rds.amazonaws.com:3306/todayhouse";
+//      String user = "admin";
+//      String password = "tjdgur123";
+//
+//      try(Connection connection = DriverManager.getConnection(url1, user, password)){
+//        // INSERT 쿼리
+//        String query = "INSERT INTO product(brandname, title, discountrate, price, img) VALUES(?, ?, ?, ?, ?)";
+//        PreparedStatement preparedStatement = connection.prepareStatement(query);
+//
+//        // 데이터 삽입
+//        for(Map<String, String> item : result){
+//          preparedStatement.setString(1, item.get("브랜드 이름"));
+//          preparedStatement.setString(2, item.get("상품명"));
+//          preparedStatement.setString(3, item.get("할인율"));
+//          preparedStatement.setString(4, item.get("가격"));
+//          preparedStatement.setString(5, item.get("이미지"));
+//          preparedStatement.executeUpdate();
+//        }
+//      } catch (SQLException e){
+//        e.printStackTrace();
+//      }
 
     }
     driver.close();
