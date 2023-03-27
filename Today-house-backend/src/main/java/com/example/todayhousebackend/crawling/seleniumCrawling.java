@@ -48,9 +48,7 @@ public class seleniumCrawling {
 
     // 웹 페이지 스크롤
     JavascriptExecutor jse = (JavascriptExecutor) driver;
-    jse.executeScript("window.scrollBy(0,14000)");
-    Thread.sleep(2000);;
-    jse.executeScript("window.scrollBy(0,14000)");
+    jse.executeScript("window.scrollBy(0,4000)");
     Thread.sleep(2000);;
 
 
@@ -61,16 +59,13 @@ public class seleniumCrawling {
       String discountrate = product.findElement(By.className("production-item-price__rate")).getText();
       String price = product.findElement(By.className("production-item-price__price")).getText();
 
-      Product product1 = new Product();
-      product1.setBrandname(brandname);
-      product1.setTitle(title);
-      product1.setDiscountrate(discountrate);
-      product1.setPrice(price);
+      System.out.println("Brand Name: " + brandname);
+      System.out.println("Title: " + title);
+      System.out.println("Discount Rate: " + discountrate);
+      System.out.println("Price: " + price);
 
-      product.add(product1);
 
     }
-    productRepository.save(product);
     //driver.close();
   }
 }
