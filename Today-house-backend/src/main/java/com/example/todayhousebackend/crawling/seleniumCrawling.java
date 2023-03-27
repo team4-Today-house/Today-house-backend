@@ -44,13 +44,20 @@ public class seleniumCrawling {
     WebDriver driver = new ChromeDriver(options);
     driver.get(url);
     // 브라우저가 완전히 로딩될 때 까지 시간 기다림
-    Thread.sleep(10000);
+    Thread.sleep(5000);
 
     // 웹 페이지 스크롤
     JavascriptExecutor jse = (JavascriptExecutor) driver;
     jse.executeScript("window.scrollBy(0,4000)");
-    Thread.sleep(2000);;
+    Thread.sleep(1000);
 
+
+    // List<WebElement> productImages = driver.findElements(By.xpath("//*[@id=\"store-index\"]/section[1]/div/div[1]/div/article/div[1]/div/div/img"));
+    List<WebElement> productImages = driver.findElements(By.cssSelector(" div.carousel.production-selling-cover-image.production-selling-overview__cover-image > ul > li img"));
+
+    for (WebElement productImage : productImages) {
+      System.out.println("상품이미지:" + productImage.getAttribute("src").split("//?")[0]);
+    }
 
     List<WebElement> productList = driver.findElements(By.xpath("//div[@class='production-item__content']"));
     for (WebElement product : productList) {
@@ -63,7 +70,6 @@ public class seleniumCrawling {
       System.out.println("Title: " + title);
       System.out.println("Discount Rate: " + discountrate);
       System.out.println("Price: " + price);
-
 
     }
     //driver.close();
