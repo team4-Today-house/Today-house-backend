@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import lombok.Setter;
 
 
 @Getter
@@ -32,10 +33,10 @@ public class Product {
     private String title;
 
     @Column
-    private int discountrate;
+    private String discountrate;
 
     @Column(updatable = false)
-    private int price;
+    private String price;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<Comment> comments;   // product 안에서 댓글이 여러개니까 코멘트들을 리스트 형식으로 감싸서 보내준다.

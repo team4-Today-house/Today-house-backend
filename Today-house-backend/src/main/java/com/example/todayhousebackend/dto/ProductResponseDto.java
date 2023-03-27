@@ -14,6 +14,6 @@ public class ProductResponseDto {
   private Long productId;
   private String brandname;
   private String title;
-  private int discountrate;
-  private int price;
+  private String discountrate;
+  private String price;
 }
