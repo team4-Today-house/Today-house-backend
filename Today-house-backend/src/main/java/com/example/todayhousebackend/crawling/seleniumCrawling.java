@@ -1,10 +1,15 @@
 package com.example.todayhousebackend.crawling;
 
-import com.example.todayhousebackend.entity.Product;
-import com.example.todayhousebackend.repository.ProductRepository;
 import java.awt.AWTException;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,10 +20,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Component;
 
+
 @Component
 @RequiredArgsConstructor
 public class seleniumCrawling {
-
 
   public static void main(String[] args) throws InterruptedException, AWTException, IOException {
 
@@ -29,8 +34,6 @@ public class seleniumCrawling {
     // 경로
     final String WEB_DRIVER_PATH = "C:/Users/유진/Desktop/chromedriver_win32/chromedriver.exe";
 
-
-    // 드라이버 실행 가능 환경설정
     System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 
     // 크롬 옵션 설정
@@ -51,28 +54,74 @@ public class seleniumCrawling {
     jse.executeScript("window.scrollBy(0,1000)");
     Thread.sleep(10000);
 
+    List<Map<String, String>> result = new ArrayList<>();
+    List<WebElement> productList = driver.findElements(By.xpath("//article[@class='production-item']"));
 
-    // List<WebElement> productImages = driver.findElements(By.xpath("//*[@id=\"store-index\"]/section[1]/div/div[1]/div/article/div[1]/div/div/img"));
-    List<WebElement> productImages = driver.findElements(By.cssSelector(" div.carousel.production-selling-cover-image.production-selling-overview__cover-image > ul > li img"));
-
-    for (WebElement productImage : productImages) {
-      System.out.println("상품이미지:" + productImage.getAttribute("src").split("//?")[0]);
-    }
-
-    List<WebElement> productList = driver.findElements(By.xpath("//div[@class='production-item__content']"));
+    int count = 0; // 상품 수를 셀 변수 추가
+    // FIXME : 1
+    // List dtoList = new ArrayList();
     for (WebElement product : productList) {
-      String brandname = product.findElement(By.className("production-item__header__brand")).getText();
+      if (count >= 1000) { // 상품 수가 500개 이상이면 크롤링 종료
+        break;
+      }
+      // FIXME : 2
+      //Dto dto = new Dto();
+      //dto.setBrandname
+      //dto.setTitle
+      //dto.setDiscountrate
+      //dto.setPrice
+      //dto.setImg
+      String brandname = product.findElement(By.className("production-item__header__brand"))
+          .getText();
       String title = product.findElement(By.className("production-item__header__name")).getText();
-      String discountrate = product.findElement(By.className("production-item-price__rate")).getText();
+      String discountrate = product.findElement(By.className("production-item-price__rate"))
+          .getText();
       String price = product.findElement(By.className("production-item-price__price")).getText();
+      String img = product.findElement(By.xpath("//img[@class='image']")).getAttribute("src");
+
+      count++;
 
       System.out.println("Brand Name: " + brandname);
       System.out.println("Title: " + title);
       System.out.println("Discount Rate: " + discountrate);
       System.out.println("Price: " + price);
+      System.out.println("img = " + img);
+      // FIXME : 3
+      // dtoList.add(dto)
+      Map<String, String> item = new HashMap<>();
+      item.put("브랜드 이름", brandname);
+      item.put("상품명", title);
+      item.put("할인율", discountrate);
+      item.put("가격", price);
+      item.put("이미지", img);
+
+      result.add(item);
+    }
+
+      String url1 = "jdbc:mysql://springboot-database.cwonrvmarhpy.ap-northeast-2.rds.amazonaws.com:3306/todayhouse";
+      String user = "admin";
+      String password = "tjdgur123";
+
+      try(Connection connection = DriverManager.getConnection(url1, user, password)){
+        // INSERT 쿼리
+        String query = "INSERT INTO product(brandname, title, discountrate, price, img) VALUES(?, ?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+        // 데이터 삽입
+        for(Map<String, String> item : result){
+          preparedStatement.setString(1, item.get("브랜드 이름"));
+          preparedStatement.setString(2, item.get("상품명"));
+          preparedStatement.setString(3, item.get("할인율"));
+          preparedStatement.setString(4, item.get("가격"));
+          preparedStatement.setString(5, item.get("이미지"));
+          preparedStatement.executeUpdate();
+        }
+      } catch (SQLException e){
+        e.printStackTrace();
+      }
+    driver.close();
+    }
+
     }
 
 
-    //driver.close();
-  }
-}
