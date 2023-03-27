@@ -37,7 +37,7 @@ public class WebSecurityConfig {
   public WebSecurityCustomizer webSecurityCustomizer() {
     // h2-console 사용 및 resources 접근 허용 설정
     return (web) -> web.ignoring()
-                .requestMatchers(PathRequest.toH2Console())
+//                .requestMatchers(PathRequest.toH2Console())
         .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
   }
 
@@ -54,6 +54,7 @@ public class WebSecurityConfig {
 //        .antMatchers(HttpMethod.GET, "/api/post", "/api/post/{postId}").permitAll()     // 게시글 조회(전체, 상세)
 //        .antMatchers(HttpMethod.POST, "/api/post/{postId}").permitAll()                 // 좋아요 -> 로그인 하지 않으면 오류 메세지 보내기 위해
         .anyRequest().authenticated()
+        .and().cors()
         // JWT 인증/인가를 사용하기 위한 설정
         .and().addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
@@ -70,9 +71,10 @@ public class WebSecurityConfig {
     CorsConfiguration config = new CorsConfiguration();
 
     // 사전에 약속된 출처를 명시
-//    config.addAllowedOrigin("http://localhost:3000");
+    config.addAllowedOrigin("http://localhost:3001");
+    config.addAllowedOrigin("http://localhost:3000");
 //    config.addAllowedOrigin("http://mini-prject-team3.s3-website.ap-northeast-2.amazonaws.com");
-    //config.addAllowedOrigin("http://charleybucket.s3-website.ap-northeast-2.amazonaws.com");
+//    config.addAllowedOrigin("http://charleybucket.s3-website.ap-northeast-2.amazonaws.com");
 
     // 특정 헤더를 클라이언트 측에서 사용할 수 있게 지정
     // 만약 지정하지 않는다면, Authorization 헤더 내의 토큰 값을 사용할 수 없음
