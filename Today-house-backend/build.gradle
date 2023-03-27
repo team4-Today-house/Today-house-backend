@@ -27,12 +27,21 @@ dependencies {
 	implementation 'junit:junit:4.13.1'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+<<<<<<< HEAD
     //runtimeOnly 'com.h2database:h2'
+=======
+//    runtimeOnly 'com.h2database:h2'
+>>>>>>> 5f53f2dc021185d6a3fa44f764b7fd79f4a07924
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 
+<<<<<<< HEAD
+=======
+//	runtimeOnly 'com.h2database:h2'
+
+>>>>>>> 5f53f2dc021185d6a3fa44f764b7fd79f4a07924
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation group: 'org.json', name: 'json', version: '20220924'
 
@@ -46,11 +55,21 @@ dependencies {
 	testImplementation 'org.mockito:mockito-core:4.8.0'
 	testImplementation 'org.mockito:mockito-junit-jupiter:4.8.0'
 
+<<<<<<< HEAD
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 
 	implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
 	implementation 'org.jsoup:jsoup:1.15.4'
+=======
+//	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+	implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.4.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+>>>>>>> 5f53f2dc021185d6a3fa44f764b7fd79f4a07924
 }
 
 jar {

@@ -2,6 +2,8 @@ package com.example.todayhousebackend.service;
 
 import com.example.todayhousebackend.dto.CommentResponseDto;
 import com.example.todayhousebackend.dto.ProductResponseDto;
+import com.example.todayhousebackend.dto.TodayDealResponseDto;
+import com.example.todayhousebackend.entity.HotItem;
 import com.example.todayhousebackend.entity.Product;
 import com.example.todayhousebackend.entity.ProductImages;
 import com.example.todayhousebackend.repository.ProductRepository;
@@ -9,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +41,18 @@ public class ProductService {
         .price(product.get().getPrice())
         .build();
   }
+
+    // 오늘의딜 상품 조회기능
+    @Transactional(readOnly = true)
+    public List<ProductResponseDto> getProduct() {
+        List<Product> products = productRepository.findAllByOrderByProductId(); // 핫 아이템 조회
+        List<ProductResponseDto> productList = new ArrayList<>(); // 오늘의 딜 response객체로 빈 공간 만들기
+
+      for (Product product : products) {
+        productList.add(new ProductResponseDto(product));
+      }
+
+    return productList;
+}
 
 }
