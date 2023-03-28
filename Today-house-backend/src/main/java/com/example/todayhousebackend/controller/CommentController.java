@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/")
+@RequestMapping("/api")
 public class CommentController {
     private final CommentService commentService;
 
@@ -23,9 +23,10 @@ public class CommentController {
         return  commentService.createComment(commentRequestDto, userDetails.getUser());
     }
 
-    @GetMapping("/comment")
-    public List<CommentResponseDto> getComments(){
-        return commentService.getComments();
+    // 상품 댓글 조회
+    @GetMapping("/comment/{productId}")
+    public List<CommentResponseDto> getComments(@PathVariable Long productId){
+        return commentService.getComments(productId);
     }
 
     @PatchMapping("/{commentId}")
