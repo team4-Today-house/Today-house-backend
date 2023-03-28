@@ -18,13 +18,13 @@ public class CommentResponseDto {
     private String loginId;
 
 
-    public CommentResponseDto(Comment comment, User user) {
+    public CommentResponseDto(Comment comment) {
         this.commentId = comment.getCommentId();
         this.comment = comment.getComment();
         this.star = comment.getStar();
         this.createdAt = comment.getCreatedAt();
         this.modifiedAt = comment.getModifiedAt();
-        this.loginId = user.getLoginId();
+        this.loginId = comment.getUser().getLoginId();
     }
 }
 

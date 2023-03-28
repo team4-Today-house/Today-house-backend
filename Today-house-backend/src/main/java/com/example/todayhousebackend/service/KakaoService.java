@@ -134,7 +134,7 @@ public class KakaoService {
         // email: kakao email
         String email = kakaoUserInfo.getEmail();
 
-        kakaoUser = new User(kakaoUserInfo.getNicknmae(), kakaoId, encodedPassword, email);
+        kakaoUser = new User(kakaoUserInfo.getNickname(), kakaoId, encodedPassword, email);
       }
 
       userRepository.save(kakaoUser);
