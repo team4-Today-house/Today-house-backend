@@ -63,6 +63,7 @@ public class WebSecurityConfig {
         .antMatchers(HttpMethod.GET,"/api/**").permitAll()
         .anyRequest().authenticated()
         .and().cors()
+
         // JWT 인증/인가를 사용하기 위한 설정
         .and().addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
