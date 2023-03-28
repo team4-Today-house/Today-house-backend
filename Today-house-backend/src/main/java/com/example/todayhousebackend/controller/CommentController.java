@@ -24,7 +24,7 @@ import java.util.List;
 public class CommentController {
     private final CommentService commentService;
 
-    @PostMapping("/comment")
+    @PostMapping("/detailPage/{productId}/comment")
     public ResponseEntity<Map<String, Object>> createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         commentService.createComment(commentRequestDto, userDetails.getUser());
 
@@ -37,17 +37,17 @@ public class CommentController {
     }
 
     // 상품 댓글 조회
-    @GetMapping("{productId}/comment")
+    @GetMapping("/detailPage/{productId}/comment")
     public List<CommentResponseDto> getComments(@PathVariable Long productId){
         return commentService.getComments(productId);
     }
 
-    @PatchMapping("{productId}/comment/{commentId}")
+    @PatchMapping("/detailPage/{productId}/comment/{commentId}")
     public CommentResponseDto updateComment(@PathVariable Long productId,@PathVariable Long commentId, @RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return commentService.updateComment(productId, commentId, commentRequestDto, userDetails.getUser());
     }
 
-    @DeleteMapping("{productId}/comment/{commentId}")
+    @DeleteMapping("/detailPage/{productId}/comment/{commentId}")
     public ResponseEntity deleteComment(@PathVariable Long productId, @PathVariable Long commentId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         commentService.deleteComment(productId, commentId, userDetails.getUser());
         return ResponseEntity.ok().body("댓글삭제완료");
