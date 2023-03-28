@@ -32,7 +32,7 @@ public class seleniumCrawling {
     // 크롬 드라이버 사용
     final String WEB_DRIVER_ID = "webdriver.chrome.driver";
     // 경로
-    final String WEB_DRIVER_PATH = "D:/사용자 폴더/Administrator/Downloads/chromedriver_win32/chromedriver.exe";
+    final String WEB_DRIVER_PATH = "C:/Users/유진/Desktop/chromedriver_win32/chromedriver.exe";
 
     System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 
@@ -66,9 +66,9 @@ public class seleniumCrawling {
     // FIXME : 1
     // List dtoList = new ArrayList();
     for (WebElement product : productList) {
-      if (count >= 1000) { // 상품 수가 500개 이상이면 크롤링 종료
-        break;
-      }
+//      if (count >= 1000) { // 상품 수가 500개 이상이면 크롤링 종료
+//        break;
+//      }
       // FIXME : 2
       //Dto dto = new Dto();
       //dto.setBrandname
@@ -82,7 +82,7 @@ public class seleniumCrawling {
       String discountrate = product.findElement(By.className("production-item-price__rate"))
           .getText();
       String price = product.findElement(By.className("production-item-price__price")).getText();
-      String img = product.findElement(By.xpath("//img[@class='image']")).getAttribute("src");
+      String img = product.findElement(By.className("image")).getAttribute("src");
 
       count++;
 
