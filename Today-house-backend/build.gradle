@@ -54,11 +54,9 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 
-<<<<<<< HEAD
+
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-=======
-	implementation 'com.google.code.gson:gson:2.8.7'
->>>>>>> c89fdec4ac583f35fe1fe3490b84df9b6d66768d
+
 }
 
 
