@@ -1,7 +1,10 @@
 package com.example.todayhousebackend.service;
 
+import com.example.todayhousebackend.dto.HotItemResponseDto;
 import com.example.todayhousebackend.dto.ProductResponseDto;
+import com.example.todayhousebackend.entity.HotItem;
 import com.example.todayhousebackend.entity.Product;
+import com.example.todayhousebackend.repository.HotItemRepository;
 import com.example.todayhousebackend.repository.ProductRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,32 +19,14 @@ public class ProductService {
 
   private final ProductRepository productRepository;
   private final CommentService commentService;
+  private final HotItemRepository hotItemRepository;
 
-  public ProductResponseDto getProductInfo(){
-    Optional<Product> product = productRepository.findById(new Product().getProductId());
-    if(!product.isPresent()){
-      throw new NullPointerException("유효하지 않은 상품입니다");
-    }
-    // imgSrc 받아오기
-//    List<String> imgSrc = new ArrayList<>();
-//    for(ProductImages productImages : product.get().getProductImages()){
-//      imgSrc.add(productImages.getImgSrc());
-//    }
-
-    return ProductResponseDto.builder()
-        .productId(product.get().getProductId())
-        .brandname(product.get().getBrandname())
-        .title(product.get().getTitle())
-        .discountrate(product.get().getDiscountrate())
-        .price(product.get().getPrice())
-        .build();
-  }
-
-    // 오늘의딜 상품 조회기능
+    // 상품 조회
     @Transactional(readOnly = true)
     public List<ProductResponseDto> getProduct() {
-        List<Product> products = productRepository.findAllByOrderByProductId(); // 핫 아이템 조회
-        List<ProductResponseDto> productList = new ArrayList<>(); // 오늘의 딜 response객체로 빈 공간 만들기
+
+        List<Product> products = productRepository.findAllByOrderByProductId(); // 상품 조회
+        List<ProductResponseDto> productList = new ArrayList<>(); // 상품 response객체로 빈 공간 만들기
 
       for (Product product : products) {
         productList.add(new ProductResponseDto(product));
@@ -49,5 +34,18 @@ public class ProductService {
 
     return productList;
 }
+
+  @Transactional(readOnly = true)
+  public List<HotItemResponseDto> getHotItem() {
+
+    List<HotItem> hotItems = hotItemRepository.findAllByOrderByHotitemId();
+    List<HotItemResponseDto> hotItemList = new ArrayList<>();
+
+    for (HotItem hotItem : hotItems) {
+      hotItemList.add(new HotItemResponseDto(hotItem));
+    }
+
+    return hotItemList;
+  }
 
 }

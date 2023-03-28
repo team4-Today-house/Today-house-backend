@@ -17,6 +17,7 @@ public class ProductResponseDto {
   private String title;
   private String discountrate;
   private String price;
+  private String img;
 
   public ProductResponseDto(Product product) {
     this.productId = product.getProductId();
@@ -24,5 +25,6 @@ public class ProductResponseDto {
     this.title = product.getTitle();
     this.discountrate = product.getDiscountrate();
     this.price = product.getPrice();
+    this.img =product.getImg();
   }
 }

@@ -60,7 +60,7 @@ public class WebSecurityConfig {
 
     http.authorizeRequests()
         .antMatchers("/**").permitAll()
-        .antMatchers(HttpMethod.GET,"/chitchat/**").permitAll()
+        .antMatchers(HttpMethod.GET,"/api/**").permitAll()
         .anyRequest().authenticated()
         .and().cors()
         // JWT 인증/인가를 사용하기 위한 설정
