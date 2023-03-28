@@ -16,11 +16,11 @@ public class ProductController {
 
   private final ProductService productService;
 
-  // 오늘의 딜
+  // 상품 조회
   @GetMapping("/api/product")
   public List<ProductResponseDto> getProduct(){return productService.getProduct(); }
 
-  // 상품 조회
+  // 핫 아이템 조회
   @GetMapping("/api/hotitem")
   public List<HotItemResponseDto> getTodayDeal(){
     return productService.getHotItem();
