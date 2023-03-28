@@ -53,7 +53,11 @@ dependencies {
 	implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.4.0'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+
+	implementation 'com.google.code.gson:gson:2.8.7'
 }
+
+
 
 jar {
 	enabled = false

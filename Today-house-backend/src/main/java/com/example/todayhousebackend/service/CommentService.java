@@ -55,7 +55,7 @@ public class CommentService {
 
     // 수정 : 회원 체크 후 수정을 해야한다.
     @Transactional
-    public CommentResponseDto updateComment(Long commentId, CommentRequestDto commentRequestDto , User user) {
+    public CommentResponseDto updateComment(Long commentId, CommentRequestDto commentRequestDto, User user) {
 
         userRepository.findById(user.getUserId()).orElseThrow( () -> new IllegalArgumentException("회원이 아닙니다."));
 
