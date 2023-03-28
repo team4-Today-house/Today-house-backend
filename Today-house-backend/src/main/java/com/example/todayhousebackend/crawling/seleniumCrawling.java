@@ -32,7 +32,7 @@ public class seleniumCrawling {
     // 크롬 드라이버 사용
     final String WEB_DRIVER_ID = "webdriver.chrome.driver";
     // 경로
-    final String WEB_DRIVER_PATH = "C:/Users/유진/Desktop/chromedriver_win32/chromedriver.exe";
+    final String WEB_DRIVER_PATH = "D:/사용자 폴더/Administrator/Downloads/chromedriver_win32/chromedriver.exe";
 
     System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 

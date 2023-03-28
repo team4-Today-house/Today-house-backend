@@ -1,5 +1,6 @@
 package com.example.todayhousebackend.controller;
 
+import com.example.todayhousebackend.dto.HotItemResponseDto;
 import com.example.todayhousebackend.dto.ProductResponseDto;
 import com.example.todayhousebackend.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -15,15 +16,15 @@ public class ProductController {
 
   private final ProductService productService;
 
+  // 오늘의 딜
+  @GetMapping("/api/product")
+  public List<ProductResponseDto> getProduct(){return productService.getProduct(); }
+
+  // 상품 조회
   @GetMapping("/api/hotitem")
-  public ResponseEntity<ProductResponseDto> getProductInfo(){
-    ProductResponseDto productResponseDto = productService.getProductInfo();
-    return ResponseEntity.ok().body(productResponseDto);
+  public List<HotItemResponseDto> getTodayDeal(){
+    return productService.getHotItem();
   }
 
-  @GetMapping("/api/todayDeal")
-  public List<ProductResponseDto> getTodayDeal(){
-    return productService.getProduct();
-  }
 
 }
