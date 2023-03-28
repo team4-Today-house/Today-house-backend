@@ -49,7 +49,7 @@ public class UserController {
     return ResponseEntity.ok(res);
   }
 
-  @GetMapping("/kakao/callback")
+  @GetMapping ("/kakao/callback")
   public ResponseEntity kakaoLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
     // code: 카카오 서버로부터 받은 인가 코드
     String createToken = kakaoService.kakaoLogin(code, response);

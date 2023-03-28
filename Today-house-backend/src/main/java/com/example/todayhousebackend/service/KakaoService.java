@@ -58,8 +58,8 @@ public class KakaoService {
     // HTTP Body 생성
     MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
     body.add("grant_type", "authorization_code");
-    body.add("client_id", "46f88d55c54cc7e4d0fdf967bbe35cdd");
-    body.add("redirect_uri", "http://localhost:3000/kakao/login");
+    body.add("client_id", "f7f9b7204052287fff71abc184ec08cf");
+    body.add("redirect_uri", "http://localhost:3000/login/oauth2/code/kakao");
     body.add("code", code);
 
     // HTTP 요청 보내기
@@ -134,7 +134,7 @@ public class KakaoService {
         // email: kakao email
         String email = kakaoUserInfo.getEmail();
 
-        kakaoUser = new User(kakaoUserInfo.getNicknmae(), kakaoId, encodedPassword, email);
+        kakaoUser = new User(kakaoUserInfo.getNickname(), kakaoId, encodedPassword, email);
       }
 
       userRepository.save(kakaoUser);
