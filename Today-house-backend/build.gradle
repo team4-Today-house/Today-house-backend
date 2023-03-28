@@ -54,10 +54,6 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 9768c2d8d25192067e42059ecf2d063a01145922
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 }
