@@ -55,7 +55,9 @@ public class CommentService {
 
     // 수정 : 회원 체크 후 수정을 해야한다.
     @Transactional
-    public CommentResponseDto updateComment(Long commentId, CommentRequestDto commentRequestDto, User user) {
+    public CommentResponseDto updateComment(Long productId, Long commentId, CommentRequestDto commentRequestDto, User user) {
+
+        checkProduct(productId);
 
         userRepository.findById(user.getUserId()).orElseThrow( () -> new IllegalArgumentException("회원이 아닙니다."));
 
@@ -68,7 +70,9 @@ public class CommentService {
 
     // 삭제 : 회원 체크 후 삭제를 해야한다.
     @Transactional
-    public void deleteComment(Long commentId, User user) {
+    public void deleteComment(Long productId, Long commentId, User user) {
+
+        checkProduct(productId);
 
         userRepository.findById(user.getUserId()).orElseThrow( () -> new IllegalArgumentException("회원이 아닙니다."));
 
