@@ -5,6 +5,8 @@ import com.example.todayhousebackend.dto.CommentResponseDto;
 import com.example.todayhousebackend.entity.Comment;
 import com.example.todayhousebackend.entity.Product;
 import com.example.todayhousebackend.entity.User;
+import com.example.todayhousebackend.exception.ApiException;
+import com.example.todayhousebackend.exception.ExceptionEnum;
 import com.example.todayhousebackend.repository.CommentRepository;
 import com.example.todayhousebackend.repository.ProductRepository;
 import com.example.todayhousebackend.repository.UserRepository;
@@ -28,9 +30,7 @@ public class CommentService {
 
     @Transactional
     public CommentResponseDto createComment(Long productId, CommentRequestDto commentRequestDto, User user) {
-//        Product product = productRepository.findById(commentRequestDto.getProductId()).orElseThrow( // product 아이디가 존재하지 않으면 제품이 없다는 뜻이므로,
-//                () -> new IllegalArgumentException("제품이 존재하지 않습니다!") // 예외처리를 써준다.
-//        );
+
         Product product = checkProduct(productId);
 
         Comment comment = commentRepository.saveAndFlush(new Comment(commentRequestDto, user, product));
@@ -41,9 +41,7 @@ public class CommentService {
     // 상품 상세 조회
     @Transactional(readOnly = true)
     public List<CommentResponseDto> getComments(Long productId){
-//        Product product = productRepository.findById(productId).orElseThrow(
-//                () -> new IllegalArgumentException("상품이 존재하지 않습니다.")
-//        );
+
         Product product = checkProduct(productId);
 
         List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
@@ -62,7 +60,6 @@ public class CommentService {
         checkProduct(productId);
 
         userInfo(user.getUserId());
-//        userRepository.findById(user.getUserId()).orElseThrow( () -> new IllegalArgumentException("회원이 아닙니다."));
 
         Comment comment = checkComment(commentId);
 
@@ -78,7 +75,6 @@ public class CommentService {
         checkProduct(productId);
 
         userInfo(user.getUserId());
-//        userRepository.findById(user.getUserId()).orElseThrow( () -> new IllegalArgumentException("회원이 아닙니다."));
 
         checkComment(commentId);
 
@@ -86,19 +82,19 @@ public class CommentService {
     }
     // 회원 존재 여부
     public User userInfo(Long userId) {
-        return userRepository.findById(userId).orElseThrow( () -> new IllegalArgumentException("회원이 아닙니다."));
+        return userRepository.findById(userId).orElseThrow( () -> new ApiException(ExceptionEnum.NOT_FOUND_USER));
     }
 
     // 상품 존재 여부
     public Product checkProduct(Long productId) {
         return productRepository.findById(productId).orElseThrow(
-                () -> new IllegalArgumentException("상품이 존재하지 않습니다."));
+                () -> new ApiException(ExceptionEnum.NOT_FOUND_PRODUCT));
     }
 
     // 댓글 존재 여부
     public Comment checkComment (Long commentId) {
         return commentRepository.findById(commentId).orElseThrow(
-                () -> new IllegalArgumentException("댓글이 존재하지 않습니다."));
+                () -> new ApiException(ExceptionEnum.NOT_FOUND_COMMENT_ADMIN));
     }
 
 

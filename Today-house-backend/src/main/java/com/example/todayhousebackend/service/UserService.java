@@ -29,7 +29,8 @@ public class UserService {
 
     Optional<User> found = userRepository.findByLoginId(dto.getLoginId());
     if(found.isPresent()) {
-      throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
+//      throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
+      throw new ApiException(ExceptionEnum.DUPLICATE_USER);
     }
 
     String password = passwordEncoder.encode(dto.getPassword());
@@ -43,13 +44,13 @@ public class UserService {
     String loginId = dto.getLoginId();
 
     User user = userRepository.findByLoginId(loginId).orElseThrow(
-        () -> new IllegalArgumentException("등록된 사용자가 없습니다.")
+        () -> new ApiException(ExceptionEnum.NOT_FOUND_USER)
     );
 
     String encodePassword = user.getPassword();
 
     if(!passwordEncoder.matches(dto.getPassword(), encodePassword)){
-      throw new IllegalArgumentException("인증 정보가 맞지 않습니다.");
+      throw new ApiException(ExceptionEnum.NOT_FOUND_PASSWORD);
     }
     return jwtUtil.createToken(user.getLoginId());
   }

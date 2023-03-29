@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public class RestApiException {
 
   private String errorMessage;
+  private int statusCode;
   private HttpStatus httpStatus;
 
 }
