@@ -31,7 +31,7 @@ public class CommentService {
 //        Product product = productRepository.findById(commentRequestDto.getProductId()).orElseThrow( // product 아이디가 존재하지 않으면 제품이 없다는 뜻이므로,
 //                () -> new IllegalArgumentException("제품이 존재하지 않습니다!") // 예외처리를 써준다.
 //        );
-        Product product = checkProduct(new Product().getProductId());
+        Product product = checkProduct(new Product(get));
 
         Comment comment = commentRepository.saveAndFlush(new Comment(commentRequestDto, user, product));
 
