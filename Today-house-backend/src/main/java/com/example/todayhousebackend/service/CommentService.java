@@ -5,6 +5,8 @@ import com.example.todayhousebackend.dto.CommentResponseDto;
 import com.example.todayhousebackend.entity.Comment;
 import com.example.todayhousebackend.entity.Product;
 import com.example.todayhousebackend.entity.User;
+import com.example.todayhousebackend.exception.ApiException;
+import com.example.todayhousebackend.exception.ExceptionEnum;
 import com.example.todayhousebackend.repository.CommentRepository;
 import com.example.todayhousebackend.repository.ProductRepository;
 import com.example.todayhousebackend.repository.UserRepository;
@@ -92,7 +94,7 @@ public class CommentService {
     // 댓글 존재 여부
     public Comment checkComment (Long commentId) {
         return commentRepository.findById(commentId).orElseThrow(
-                () -> new IllegalArgumentException("댓글이 존재하지 않습니다."));
+                () -> new ApiException(ExceptionEnum.NOT_FOUND_COMMENT_ADMIN));
     }
 
 

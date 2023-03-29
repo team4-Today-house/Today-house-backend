@@ -3,6 +3,7 @@ package com.example.todayhousebackend.service;
 import com.example.todayhousebackend.dto.SignupRequestDto;
 import com.example.todayhousebackend.entity.User;
 import com.example.todayhousebackend.exception.ApiException;
+import com.example.todayhousebackend.exception.ExceptionEnum;
 import com.example.todayhousebackend.jwt.JwtUtil;
 import com.example.todayhousebackend.repository.UserRepository;
 import java.util.Optional;
@@ -27,7 +28,8 @@ public class UserService {
 
     Optional<User> found = userRepository.findByLoginId(dto.getLoginId());
     if(found.isPresent()) {
-      throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
+//      throw new IllegalArgumentException("중복된 사용자가 존재합니다.");
+      throw new ApiException(ExceptionEnum.DUPLICATE_USER);
     }
 
     String password = passwordEncoder.encode(dto.getPassword());
