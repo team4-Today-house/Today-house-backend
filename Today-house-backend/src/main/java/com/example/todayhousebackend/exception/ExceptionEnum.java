@@ -11,13 +11,8 @@ public enum ExceptionEnum {
   INVAILD_TOKEN(HttpStatus.BAD_REQUEST, 400,"토큰이 유효하지 않습니다."),
   NOT_TOKEN(HttpStatus.BAD_REQUEST, 400,"로그인 해주세요.(토큰없음)"),
 
-<<<<<<< HEAD
-  ONLY_ADMIN(HttpStatus.BAD_REQUEST, "관리자계정으로 삭제가능합니다."),
-  DUPLICATE_USER(HttpStatus.BAD_REQUEST, "중복된 사용자가 존재합니다."),
-=======
   ONLY_ADMIN(HttpStatus.BAD_REQUEST, 400,"관리자계정으로 삭제가능합니다."),
   DUPLICATE_USER(HttpStatus.BAD_REQUEST, 400,"중복된 사용자입니다."),
->>>>>>> 9da58777948166953771fa7e1e4d00d5ca94618f
 
   NOT_FOUND_PASSWORD(HttpStatus.BAD_REQUEST, 400,"인증정보가 일치하지 않습니다."),
   NOT_FOUND_USER(HttpStatus.BAD_REQUEST, 400,"회원을 찾을 수 없습니다."),
