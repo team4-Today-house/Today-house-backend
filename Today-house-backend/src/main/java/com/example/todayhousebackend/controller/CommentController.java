@@ -25,12 +25,11 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/detailPage/{productId}/comment")
-    public ResponseEntity<Map<String, Object>> createComment(@RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        commentService.createComment(commentRequestDto, userDetails.getUser());
+    public ResponseEntity<Map<String, Object>> createComment(@PathVariable Long productId, @RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("msg", "작성성공");
-        responseBody.put("data", commentService.createComment(commentRequestDto, userDetails.getUser()));
+        responseBody.put("data", commentService.createComment(productId, commentRequestDto, userDetails.getUser()));
 
         return ResponseEntity.status(HttpStatus.CREATED)
               .body(responseBody);
