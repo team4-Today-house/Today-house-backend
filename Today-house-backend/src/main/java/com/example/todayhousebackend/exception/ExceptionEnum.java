@@ -19,7 +19,7 @@ public enum ExceptionEnum {
   NOT_FOUND_POST(HttpStatus.BAD_REQUEST, 403,"게시글 수정 권한이 없습니다."),
   NOT_FOUND_POST_ADMIN(HttpStatus.BAD_REQUEST, 404,"게시물을 찾을 수 없습니다.(관리자계정)"),
   NOT_FOUND_COMMENT(HttpStatus.BAD_REQUEST, 403,"댓글 수정 권한이 없습니다."),
-  NOT_FOUND_COMMENT_ADMIN(HttpStatus.BAD_REQUEST, 404,"댓글을 찾을 수 없습니다."),
+  NOT_FOUND_COMMENT_ADMIN(HttpStatus.NOT_FOUND, 404,"댓글을 찾을 수 없습니다."),
   ;
 
   private HttpStatus status;
