@@ -6,6 +6,7 @@ import com.example.todayhousebackend.dto.ProductResponseDto;
 import com.example.todayhousebackend.entity.HotItem;
 import com.example.todayhousebackend.entity.Product;
 import com.example.todayhousebackend.exception.ApiException;
+import com.example.todayhousebackend.exception.ExceptionEnum;
 import com.example.todayhousebackend.repository.HotItemRepository;
 import com.example.todayhousebackend.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class DetailService {
   public ProductResponseDto getDetailProductId(Long id){
 
     Product product = productRepository.findById(id).orElseThrow(
-        () -> new IllegalArgumentException("제품을 찾을 수 없습니다")
+        () -> new ApiException(ExceptionEnum.NOT_FOUND_PRODUCT)
     );
 
     return  new ProductResponseDto(product);
@@ -32,7 +33,7 @@ public class DetailService {
   @Transactional(readOnly = true)
   public HotItemResponseDto getDetailHotitemId(Long id){
     HotItem hotItem = hotItemRepository.findById(id).orElseThrow(
-        () -> new IllegalArgumentException("제품을 찾을 수 없습니다")
+        () -> new ApiException(ExceptionEnum.NOT_FOUND_PRODUCT)
     );
 
     return  new HotItemResponseDto(hotItem);

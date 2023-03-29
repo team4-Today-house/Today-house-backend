@@ -82,13 +82,13 @@ public class CommentService {
     }
     // 회원 존재 여부
     public User userInfo(Long userId) {
-        return userRepository.findById(userId).orElseThrow( () -> new IllegalArgumentException("회원이 아닙니다."));
+        return userRepository.findById(userId).orElseThrow( () -> new ApiException(ExceptionEnum.NOT_FOUND_USER));
     }
 
     // 상품 존재 여부
     public Product checkProduct(Long productId) {
         return productRepository.findById(productId).orElseThrow(
-                () -> new IllegalArgumentException("상품이 존재하지 않습니다."));
+                () -> new ApiException(ExceptionEnum.NOT_FOUND_PRODUCT));
     }
 
     // 댓글 존재 여부
