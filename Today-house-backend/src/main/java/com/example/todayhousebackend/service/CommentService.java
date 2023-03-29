@@ -28,14 +28,8 @@ public class CommentService {
 
     @Transactional
     public CommentResponseDto createComment(Long productId, CommentRequestDto commentRequestDto, User user) {
-//        Product product = productRepository.findById(commentRequestDto.getProductId()).orElseThrow( // product 아이디가 존재하지 않으면 제품이 없다는 뜻이므로,
-//                () -> new IllegalArgumentException("제품이 존재하지 않습니다!") // 예외처리를 써준다.
-//        );
-<<<<<<< HEAD
-        Product product = checkProduct(new Product(get));
-=======
+
         Product product = checkProduct(productId);
->>>>>>> c582a84693017989dee0c36137d71eeb25dbf61d
 
         Comment comment = commentRepository.saveAndFlush(new Comment(commentRequestDto, user, product));
 
@@ -45,9 +39,7 @@ public class CommentService {
     // 상품 상세 조회
     @Transactional(readOnly = true)
     public List<CommentResponseDto> getComments(Long productId){
-//        Product product = productRepository.findById(productId).orElseThrow(
-//                () -> new IllegalArgumentException("상품이 존재하지 않습니다.")
-//        );
+
         Product product = checkProduct(productId);
 
         List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
@@ -66,7 +58,6 @@ public class CommentService {
         checkProduct(productId);
 
         userInfo(user.getUserId());
-//        userRepository.findById(user.getUserId()).orElseThrow( () -> new IllegalArgumentException("회원이 아닙니다."));
 
         Comment comment = checkComment(commentId);
 
@@ -82,7 +73,6 @@ public class CommentService {
         checkProduct(productId);
 
         userInfo(user.getUserId());
-//        userRepository.findById(user.getUserId()).orElseThrow( () -> new IllegalArgumentException("회원이 아닙니다."));
 
         checkComment(commentId);
 
