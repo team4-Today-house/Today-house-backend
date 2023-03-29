@@ -2,6 +2,7 @@ package com.example.todayhousebackend.service;
 
 import com.example.todayhousebackend.dto.CommentRequestDto;
 import com.example.todayhousebackend.dto.CommentResponseDto;
+import com.example.todayhousebackend.dto.ProductResponseDto;
 import com.example.todayhousebackend.entity.Comment;
 import com.example.todayhousebackend.entity.Product;
 import com.example.todayhousebackend.entity.User;
@@ -38,15 +39,17 @@ public class CommentService {
         return new CommentResponseDto(comment);
     }
 
-    // 상품 상세 조회
+    // 상품 댓글 조회
     @Transactional(readOnly = true)
     public List<CommentResponseDto> getComments(Long productId){
 
         Product product = checkProduct(productId);
 
+        List<Comment> comments = commentRepository.findAllByProduct(product);
+
         List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
 
-        for (Comment comment : product.getComments()) {
+        for (Comment comment : comments) {
             commentResponseDtoList.add(new CommentResponseDto(comment));
         }
 
