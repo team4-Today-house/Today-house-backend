@@ -3,6 +3,7 @@ package com.example.todayhousebackend.service;
 import com.example.todayhousebackend.dto.SignupRequestDto;
 import com.example.todayhousebackend.entity.User;
 import com.example.todayhousebackend.exception.ApiException;
+import com.example.todayhousebackend.exception.ExceptionEnum;
 import com.example.todayhousebackend.jwt.JwtUtil;
 import com.example.todayhousebackend.repository.UserRepository;
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class UserService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final JwtUtil jwtUtil;
+
 
 
   @Transactional

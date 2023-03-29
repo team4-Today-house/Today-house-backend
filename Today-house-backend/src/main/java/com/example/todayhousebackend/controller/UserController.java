@@ -30,7 +30,7 @@ public class UserController {
   private final KakaoService kakaoService;
 
   @PostMapping("/api/user/signup")
-  public ResponseEntity<Map<String, String>> signup(@RequestBody @Valid SignupRequestDto dto){
+  public ResponseEntity<Map<String, String>> signup(@RequestBody @Valid SignupRequestDto dto) {
 
     userService.signup(dto);
     Map<String, String> response = new HashMap<>();

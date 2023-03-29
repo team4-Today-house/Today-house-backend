@@ -17,8 +17,6 @@ public class CommentResponseDto {
     private String modifiedAt;
     private String loginId;
 
-
-
     public CommentResponseDto(Comment comment) {
         this.commentId = comment.getCommentId();
         this.comment = comment.getComment();
