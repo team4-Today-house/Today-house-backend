@@ -13,6 +13,7 @@
 4. S3 이미지 업로드
 5. 무한스크롤을 위한 페이징
 6. jsoup과 selenium을 사용한 크롤링
+7. 카카오 로그인 기능
 
 ## ⚙ NOTION
 https://www.notion.so/4-e22f474a93d94118ac621c09c9e83937
