@@ -1,6 +1,6 @@
 # Today-house-backend
 
-<h1 align="center">Welcome to readme-md-oday-house-backend 👋</h1>
+<h1 align="center">Welcome to Today-house-backend 👋</h1>
 <p align="center">
   <img src="https://img.shields.io/npm/v/readme-md-generator.svg?orange=blue" />
   <a href="https://www.npmjs.com/package/readme-md-generator">
