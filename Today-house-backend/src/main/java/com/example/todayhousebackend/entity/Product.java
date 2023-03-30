@@ -40,8 +40,8 @@ public class Product {
     @Column(updatable = false)
     private String img;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<Comment> comments;   // product 안에서 댓글이 여러개니까 코멘트들을 리스트 형식으로 감싸서 보내준다.
+//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+//    private List<Comment> comments;   // product 안에서 댓글이 여러개니까 코멘트들을 리스트 형식으로 감싸서 보내준다.
 
     public Product(ProductResponseDto productResponseDto) {
         this.brandname = productResponseDto.getBrandname();
