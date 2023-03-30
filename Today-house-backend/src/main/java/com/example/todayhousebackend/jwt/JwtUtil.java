@@ -1,7 +1,6 @@
 package com.example.todayhousebackend.jwt;
 
 import com.example.todayhousebackend.security.UserDetailsServiceImpl;
-import com.example.todayhousebackend.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
