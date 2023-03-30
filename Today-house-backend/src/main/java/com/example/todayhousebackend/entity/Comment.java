@@ -3,6 +3,7 @@ package com.example.todayhousebackend.entity;
 import com.example.todayhousebackend.dto.CommentRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor
+@Setter
 public class Comment extends Timestamped {
 
   @Id
@@ -21,6 +23,9 @@ public class Comment extends Timestamped {
 
   @Column(nullable = false)
   private int star;
+
+  @Column
+  private String imgUrl;
 
   @ManyToOne
   @JoinColumn(name = "USER_ID", nullable = false)
@@ -35,6 +40,7 @@ public class Comment extends Timestamped {
     this.star = commentRequestDto.getStar();
     this.user = user;
     this.product = product;
+    this.imgUrl = commentRequestDto.getImgUrl();
   }
 
   @Transactional

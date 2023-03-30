@@ -2,10 +2,10 @@ package com.example.todayhousebackend.controller;
 
 import com.example.todayhousebackend.dto.CommentRequestDto;
 import com.example.todayhousebackend.dto.CommentResponseDto;
+import com.example.todayhousebackend.entity.Comment;
 import com.example.todayhousebackend.security.UserDetailsImpl;
 import com.example.todayhousebackend.service.CommentService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,12 +25,13 @@ import java.util.List;
 public class CommentController {
     private final CommentService commentService;
 
-    @PostMapping("/detailPage/{productId}/comment")
-    public ResponseEntity<Map<String, Object>> createComment(@PathVariable Long productId, @RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    @PostMapping(value = "/detailPage/{productId}/comment", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Map<String, Object>> createComment(@PathVariable Long productId, @RequestParam(value = "image") MultipartFile image, Comment comment, @RequestPart CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails)
+        throws IOException {
 
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("msg", "작성성공");
-        responseBody.put("data", commentService.createComment(productId, commentRequestDto, userDetails.getUser()));
+        responseBody.put("data", commentService.createComment(productId, image, comment, commentRequestDto, userDetails.getUser()));
 
         return ResponseEntity.status(HttpStatus.CREATED)
               .body(responseBody);

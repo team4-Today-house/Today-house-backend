@@ -4,8 +4,6 @@ package com.example.todayhousebackend.controller;
 import com.example.todayhousebackend.dto.HotItemResponseDto;
 import com.example.todayhousebackend.dto.ProductResponseDto;
 import com.example.todayhousebackend.service.DetailService;
-import com.example.todayhousebackend.service.ProductService;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

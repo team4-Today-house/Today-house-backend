@@ -2,18 +2,15 @@ package com.example.todayhousebackend.controller;
 
 
 import com.example.todayhousebackend.dto.SignupRequestDto;
-import com.example.todayhousebackend.exception.ExceptionEnum;
 import com.example.todayhousebackend.jwt.JwtUtil;
 import com.example.todayhousebackend.service.KakaoService;
 import com.example.todayhousebackend.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.json.HTTP;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

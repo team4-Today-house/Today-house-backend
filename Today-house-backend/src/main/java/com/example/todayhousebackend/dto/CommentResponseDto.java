@@ -3,7 +3,6 @@ package com.example.todayhousebackend.dto;
 import com.example.todayhousebackend.entity.Comment;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
@@ -16,6 +15,7 @@ public class CommentResponseDto {
     private String createdAt;
     private String modifiedAt;
     private String loginId;
+    private String imgUrl;
 
     public CommentResponseDto(Comment comment) {
         this.commentId = comment.getCommentId();
@@ -24,6 +24,11 @@ public class CommentResponseDto {
         this.createdAt = comment.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd a h:mm"));
         this.modifiedAt = comment.getModifiedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd a h:mm"));
         this.loginId = comment.getUser().getLoginId();
+    }
+
+    public CommentResponseDto(Comment comment, String imgUrl){
+        this(comment);
+        this.imgUrl = imgUrl;
     }
 }
 
