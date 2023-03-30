@@ -1,8 +1,7 @@
 <h1 align="center">Welcome to Today-house-backend 👋</h1>
 <p align="center">
 
-</p>
-## ✨프로젝트 설명
+## ✨ 프로젝트 설명
 
 오늘의 집 클론코딩을 해봤습니다.
 
