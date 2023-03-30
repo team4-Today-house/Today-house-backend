@@ -25,17 +25,29 @@ import org.springframework.web.multipart.MultipartFile;
 public class CommentController {
     private final CommentService commentService;
 
-    @PostMapping(value = "/detailPage/{productId}/comment", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Map<String, Object>> createComment(@PathVariable Long productId, @RequestParam(value = "image") MultipartFile image, Comment comment, @RequestPart CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails)
-        throws IOException {
+    @PostMapping(value = "/detailPage/{productId}/comment")
+    public ResponseEntity<Map<String, Object>> createComment(@PathVariable Long productId, @RequestBody CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails)
+    {
 
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("msg", "작성성공");
-        responseBody.put("data", commentService.createComment(productId, image, comment, commentRequestDto, userDetails.getUser()));
+        responseBody.put("data", commentService.createComment( productId, commentRequestDto, userDetails.getUser()));
 
         return ResponseEntity.status(HttpStatus.CREATED)
               .body(responseBody);
     }
+
+//    @PostMapping(value = "/detailPage/{productId}/comment", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+//    public ResponseEntity<Map<String, Object>> createComment(@PathVariable Long productId, @RequestParam(value = "image") MultipartFile image, Comment comment, @RequestPart CommentRequestDto commentRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails)
+//        throws IOException {
+//
+//        Map<String, Object> responseBody = new HashMap<>();
+//        responseBody.put("msg", "작성성공");
+//        responseBody.put("data", commentService.createComment(productId, image, comment, commentRequestDto, userDetails.getUser()));
+//
+//        return ResponseEntity.status(HttpStatus.CREATED)
+//            .body(responseBody);
+//    }
 
     // 상품 댓글 조회
     @GetMapping("/detailPage/{productId}/comment")

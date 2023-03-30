@@ -36,8 +36,14 @@ public class Comment extends Timestamped {
     this.comment = commentRequestDto.getContents();
     this.user = user;
     this.product = product;
-    this.imgUrl = commentRequestDto.getImgUrl();
   }
+
+//  public Comment(CommentRequestDto commentRequestDto, User user, Product product) {
+//    this.comment = commentRequestDto.getContents();
+//    this.user = user;
+//    this.product = product;
+//    this.imgUrl = commentRequestDto.getImgUrl();
+//  }
 
   @Transactional
   public void update(CommentRequestDto commentRequestDto) {

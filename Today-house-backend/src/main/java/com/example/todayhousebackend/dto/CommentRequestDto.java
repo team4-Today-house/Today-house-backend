@@ -7,5 +7,5 @@ import lombok.Getter;
 public class CommentRequestDto {
 
     private String contents;
-    private String imgUrl;
+//    private String imgUrl;
 }
