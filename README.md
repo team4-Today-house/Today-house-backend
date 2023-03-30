@@ -2,23 +2,24 @@
 <p align="center">
 
 </p>
-## ✨ Demo
+## ✨프로젝트 설명
 
-## 🚀 Usage
+오늘의 집 클론코딩을 해봤습니다.
 
-## Code Contributors
+## 🚀 주요기능
 
+1. 회원가입
+2. 로그인
+3. 댓글기능
+4. S3 이미지 업로드
+5. 무한스크롤을 위한 페이징
+6. jsoup과 selenium을 사용한 크롤링
 
-## Financial Contributors
+## ⚙ NOTION
+https://www.notion.so/4-e22f474a93d94118ac621c09c9e83937
 
+## 📝 ERD
 
-## 🤝 Contributing
-
-## Show your support
-
-
-
+![image](https://user-images.githubusercontent.com/74438259/228840463-7dfca429-209f-48c9-8f8c-44cd3e146873.png)
 
 ---
-
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
