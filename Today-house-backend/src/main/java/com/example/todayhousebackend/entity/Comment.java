@@ -34,7 +34,6 @@ public class Comment extends Timestamped {
 
   public Comment(CommentRequestDto commentRequestDto, User user, Product product) {
     this.comment = commentRequestDto.getContents();
-    this.star = commentRequestDto.getStar();
     this.user = user;
     this.product = product;
     this.imgUrl = commentRequestDto.getImgUrl();
