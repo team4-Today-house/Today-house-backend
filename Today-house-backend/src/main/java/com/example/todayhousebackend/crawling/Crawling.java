@@ -14,7 +14,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.openqa.selenium.WebElement;
 
 public class Crawling {
 
@@ -28,7 +27,6 @@ public class Crawling {
     Elements contentsPrice = doc.getElementsByAttributeValue("class","production-item-price__price");
     // FIXME : Check
     Elements img = doc.getElementsByAttributeValue("class" , "image");
-//    Elements img = doc.select("#store-index > section.container.store-index-section.store-index-today-deal-list > div > div.col-12  > div.today-deal-item--wrapper > article.today-deal-item > div.today-deal-item__image > div.today-deal-item__image__item > div.production-item-image > img");
 
     List<Map<String, String>> result = new ArrayList<>();
     for (int i = 0; i < title.size(); i++) {

@@ -8,4 +8,5 @@ public class CommentRequestDto {
 
     private int star;
     private String contents;
+    private String imgUrl;
 }
