@@ -23,7 +23,6 @@ https://www.notion.so/4-e22f474a93d94118ac621c09c9e83937
 ![image](https://user-images.githubusercontent.com/74438259/228840463-7dfca429-209f-48c9-8f8c-44cd3e146873.png)
 
 
-
 ## 🎞시연 영상
 
 https://youtu.be/3kY5DpSfsGM
